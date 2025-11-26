@@ -1389,6 +1389,8 @@ body .title-container .title {
 }
 
 .location-controls {
+  position: relative;
+  z-index: 10;
   margin-top: 16px;
   display: flex;
   flex-wrap: wrap;
@@ -1439,4 +1441,86 @@ body .title-container .title {
   .location-controls {
     gap: 8px;
   }
+}
+
+/* ---- Modern layout overrides to tie header + content together ---- */
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header,
+.current-weather,
+.daily-forecast,
+.footer {
+  width: 100%;
+  max-width: 1160px;
+}
+
+/* Header stack */
+.header {
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+.status-message {
+  margin-top: 12px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.75);
+  text-align: left;
+}
+
+/* Let main columns sit in normal flow instead of being absolutely positioned */
+.current-weather,
+.daily-forecast {
+  position: relative;
+  left: auto;
+  top: auto;
+  -webkit-transform: none;
+          transform: none;
+  margin-top: 32px;
+}
+
+/* Two-column layout on larger screens */
+@media (min-width: 960px) {
+  .main-layout {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+  }
+}
+
+/* Create a virtual main layout wrapper using body children */
+@media (min-width: 960px) {
+  .current-weather,
+  .daily-forecast {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 40px;
+  }
+
+  .current-weather {
+    margin-right: 40px;
+  }
+}
+
+/* Ensure cards inside current-weather shrink nicely */
+.current-weather .current-weather-main,
+.daily-forecast .forecast-block-prop,
+.sunr-suns-container,
+.stats-container,
+.temp-container {
+  width: 100%;
+  max-width: 100%;
+}
+
+.footer {
+  position: relative;
+  top: auto;
+  left: auto;
+  -webkit-transform: none;
+          transform: none;
+  margin: 40px auto 24px;
 }

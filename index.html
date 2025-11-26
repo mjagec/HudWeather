@@ -1,33 +1,36 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
-     <link rel="stylesheet"  type="text/css" href="style/style.css">
-     <title>HudWeather</title>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1"
+    />
+    <link rel="stylesheet" type="text/css" href="style/style.css" />
+    <title>HudWeather</title>
   </head>
   <body>
-     <div class="header">
-        <div class="title-container">
-           <h1 class="title">HudWeather</h1>
-        </div>
-     </div>
+    <div class="header">
+      <div class="title-container">
+        <h1 class="title">HudWeather</h1>
+      </div>
+      <div id="status" class="status-message"></div>
 
-     <div id="status" class="status-message"></div>
-
-     <div class="location-controls">
+      <div class="location-controls">
         <button id="use-location-btn">Use my current location</button>
         <label for="city-select">or choose a UK city:</label>
         <select id="city-select">
-           <option value="">Select a city</option>
-           <option value="london">London</option>
-           <option value="manchester">Manchester</option>
-           <option value="birmingham">Birmingham</option>
-           <option value="leeds">Leeds</option>
-           <option value="glasgow">Glasgow</option>
+          <option value="">Select a city</option>
+          <option value="london">London</option>
+          <option value="manchester">Manchester</option>
+          <option value="birmingham">Birmingham</option>
+          <option value="leeds">Leeds</option>
+          <option value="glasgow">Glasgow</option>
         </select>
-     </div>
+      </div>
+    </div>
 
-     <div class="current-weather">
+    <div class="current-weather">
         <p id="type-p">Current Weather</p>
         <div class="current-weather-main">
            <div class="weather-icon"><img src="style/icons/unknown.png" /></div>
@@ -67,15 +70,16 @@
            </div>
         </div>
         <div class="sunr-suns-container">
-          <img id="sunrise-icon" src="style/icons-2/sunrise-icon.svg">
+          <img id="sunrise-icon" src="style/icons-2/sunrise-icon.svg" />
           <p id="sunrise-text">Sunrise</p>
-           <p id="sunrise"></p>
-           <img id="sunrise-icon" src="style/icons-2/sunset-icon.svg">
-           <p id="sunset-text">Sunset</p>
-           <p id="sunset"></p>
+          <p id="sunrise"></p>
+          <img id="sunset-icon" src="style/icons-2/sunset-icon.svg" />
+          <p id="sunset-text">Sunset</p>
+          <p id="sunset"></p>
         </div>
-     </div>
-     <div class="daily-forecast">
+      </div>
+
+      <div class="daily-forecast">
       
          <p id="type-p">Forecasted Weather</p>
          <p id="forecast-status" class="status-message"></p>
@@ -105,10 +109,16 @@
         </div>
         </div>
       <div class="footer">
-         <p id="copyright-author">Michell Jagec @ 2021</p>
-         <span class="project-desc">personal weather app working on the <strong>OpenWeatherApp API</strong>, source code can be found here; <a href="https://github.com/j-michell"><img src="style/icons-2/github-icon.png"></p></a></span>
+        <p id="copyright-author">Michell Jagec @ 2021-2025</p>
+        <p class="project-desc">
+          personal weather app working on the
+          <strong>OpenWeatherApp API</strong>, source code can be found here;
+          <a href="https://github.com/j-michell" aria-label="GitHub profile">
+            <img src="style/icons-2/github-icon.png" alt="GitHub" />
+          </a>
+        </p>
       </div>
-     <script src="current.js"></script>
+      <script src="current.js"></script>
   </body>
 </html>
 
