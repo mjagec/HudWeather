@@ -317,54 +317,84 @@ body {
   box-shadow: 0 18px 45px rgba(15, 15, 15, 0.12);
   padding: 12px 14px;
   display: grid;
-  grid-template-columns: auto minmax(0, 1.4fr) minmax(0, 1.6fr);
-  -moz-column-gap: 10px;
-       column-gap: 10px;
+  grid-template-columns: auto minmax(0, 1.4fr) minmax(0, 1.2fr);
+  grid-auto-rows: auto;
+  -moz-column-gap: 12px;
+       column-gap: 12px;
   row-gap: 8px;
   font-size: 13px;
+  align-items: center;
 }
-
-.icon-container {
+@media (min-width: 768px) {
+  .stats-container {
+    padding: 14px 16px;
+  }
+}
+.stats-container .icon-container {
+  grid-column: 1;
+  grid-row: 1/span 3;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 12px;
 }
-.icon-container img {
+.stats-container .icon-container img {
   width: 22px;
   height: 22px;
 }
-
-.stats-desc {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 12px;
+.stats-container .stats-desc {
+  display: contents;
+}
+.stats-container .stats-desc p {
+  margin: 0;
+  font-size: 12px;
   color: rgba(80, 80, 80, 0.9);
 }
-
-.wind,
-.humidity,
-.pressure {
+.stats-container .stats-desc p:nth-child(1) {
+  grid-column: 2;
+  grid-row: 1;
+}
+.stats-container .stats-desc p:nth-child(2) {
+  grid-column: 2;
+  grid-row: 2;
+}
+.stats-container .stats-desc p:nth-child(3) {
+  grid-column: 2;
+  grid-row: 3;
+}
+.stats-container .wind,
+.stats-container .humidity,
+.stats-container .pressure {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 3px;
+  font-size: 13px;
 }
-
-#wind-deg,
-#wind-speed,
-#humidity,
-#pressure {
+.stats-container .wind {
+  grid-column: 3;
+  grid-row: 1;
+}
+.stats-container .humidity {
+  grid-column: 3;
+  grid-row: 2;
+}
+.stats-container .pressure {
+  grid-column: 3;
+  grid-row: 3;
+}
+.stats-container #wind-deg,
+.stats-container #wind-speed,
+.stats-container #humidity,
+.stats-container #pressure {
   margin: 0;
   font-weight: 600;
 }
-
-#wind-deg-symb,
-#wind-spd-symb,
-#hum-percentage,
-#pressure-symb {
+.stats-container #wind-deg-symb,
+.stats-container #wind-spd-symb,
+.stats-container #hum-percentage,
+.stats-container #pressure-symb {
   margin: 0;
   font-size: 11px;
   color: rgba(80, 80, 80, 0.9);

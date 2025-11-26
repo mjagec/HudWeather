@@ -272,51 +272,85 @@ body
   @include bento-card($radius-lg)
   padding: 12px 14px
   display: grid
-  grid-template-columns: auto minmax(0, 1.4fr) minmax(0, 1.6fr)
-  column-gap: 10px
+  grid-template-columns: auto minmax(0, 1.4fr) minmax(0, 1.2fr)
+  grid-auto-rows: auto
+  column-gap: 12px
   row-gap: 8px
   font-size: 13px
-
-.icon-container
-  display: flex
-  flex-direction: column
-  justify-content: center
   align-items: center
-  gap: 12px
 
-  img
-    width: 22px
-    height: 22px
+  @include media(">=tablet")
+    padding: 14px 16px
 
-.stats-desc
-  display: flex
-  flex-direction: column
-  justify-content: center
-  gap: 12px
-  color: $color-text-muted
+  .icon-container
+    grid-column: 1
+    grid-row: 1 / span 3
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    gap: 12px
 
-.wind,
-.humidity,
-.pressure
-  display: flex
-  flex-wrap: wrap
-  align-items: baseline
-  gap: 3px
+    img
+      width: 22px
+      height: 22px
 
-#wind-deg,
-#wind-speed,
-#humidity,
-#pressure
-  margin: 0
-  font-weight: 600
+  .stats-desc
+    // let its <p> children become grid items
+    display: contents
 
-#wind-deg-symb,
-#wind-spd-symb,
-#hum-percentage,
-#pressure-symb
-  margin: 0
-  font-size: 11px
-  color: $color-text-muted
+    p
+      margin: 0
+      font-size: 12px
+      color: $color-text-muted
+
+      &:nth-child(1)
+        grid-column: 2
+        grid-row: 1
+
+      &:nth-child(2)
+        grid-column: 2
+        grid-row: 2
+
+      &:nth-child(3)
+        grid-column: 2
+        grid-row: 3
+
+  .wind,
+  .humidity,
+  .pressure
+    display: flex
+    flex-wrap: wrap
+    align-items: baseline
+    gap: 3px
+    font-size: 13px
+
+  .wind
+    grid-column: 3
+    grid-row: 1
+
+  .humidity
+    grid-column: 3
+    grid-row: 2
+
+  .pressure
+    grid-column: 3
+    grid-row: 3
+
+  #wind-deg,
+  #wind-speed,
+  #humidity,
+  #pressure
+    margin: 0
+    font-weight: 600
+
+  #wind-deg-symb,
+  #wind-spd-symb,
+  #hum-percentage,
+  #pressure-symb
+    margin: 0
+    font-size: 11px
+    color: $color-text-muted
 
 // Sunrise / sunset tile
 .sunr-suns-container
