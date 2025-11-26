@@ -47,8 +47,8 @@ function forecastWeather(){
   fetch("/api/forecast?lat=53.649&lon=-1.7842")
   .then(res => res.json())
   .then(data => {
-    // If the API returned an error (e.g. 400/500), data.daily may be undefined.
-    if (!data || !Array.isArray(data.daily)) {
+    // 5 day / 3 hour forecast returns data.list.
+    if (!data || !Array.isArray(data.list)) {
       console.error('Unexpected forecast response', data);
       const statusEl = document.querySelector('#forecast-status');
       if (statusEl) {
@@ -57,52 +57,52 @@ function forecastWeather(){
       return;
     }
 
-    console.log(data.daily)
+    console.log(data.list)
 
     const statusEl = document.querySelector('#forecast-status');
     if (statusEl) {
       statusEl.textContent = '';
     }
 
-    let week = data.daily;
-    for(let i = 1, len = week.length; i < len; i++){
+    // 5 days * 8 entries per day ≈ 40 entries, 3-hour step.
+    const list = data.list;
 
-      document.querySelector('#date-tommorow').innerHTML = 'Tommorow ' + new Date(week[1].dt * 1000).toDateString();
-      let forecastIcon = document.querySelector('.forecast-icon');
-      var icon = week[1].weather[0].icon;
-      forecastIcon.innerHTML = `<img src="style/icons/${icon}.png">`;
-      document.querySelector('#forecast-tommorow-temp').innerHTML = Math.trunc(week[1].temp.day) + '°';
+    // Helper to safely read a forecast entry by index
+    const getEntry = (idx) => list[idx] || null;
 
-      document.querySelector('#date-d2').innerHTML = new Date(week[2].dt * 1000).toDateString();
-      let forecastIconD2 = document.querySelector('.forecast-icon-d2');
-      var icon = week[2].weather[0].icon;
-      forecastIconD2.innerHTML = `<img src="style/icons/${icon}.png">`;
-      document.querySelector('#forecast-d2-temp').innerHTML = Math.trunc(week[2].temp.day) + '°';
+    const updateDay = (index, dateSelector, iconSelector, tempSelector) => {
+      const entry = getEntry(index);
+      if (!entry) return;
 
-      document.querySelector('#date-d3').innerHTML = new Date(week[3].dt * 1000).toDateString();
-      let forecastIconD3 = document.querySelector('.forecast-icon-d3');
-      var icon = week[3].weather[0].icon;
-      forecastIconD3.innerHTML = `<img src="style/icons/${icon}.png">`;
-      document.querySelector('#forecast-d3-temp').innerHTML = Math.trunc(week[3].temp.day) + '°';
+      const date = new Date(entry.dt * 1000).toDateString();
+      const icon = entry.weather && entry.weather[0] && entry.weather[0].icon;
+      const temp = entry.main && entry.main.temp;
 
-      document.querySelector('#date-d4').innerHTML = new Date(week[4].dt * 1000).toDateString();
-      let forecastIconD4 = document.querySelector('.forecast-icon-d4');
-      var icon = week[4].weather[0].icon;
-      forecastIconD4.innerHTML = `<img src="style/icons/${icon}.png">`;
-      document.querySelector('#forecast-d4-temp').innerHTML = Math.trunc(week[4].temp.day) + '°';
+      const dateEl = document.querySelector(dateSelector);
+      if (dateEl) {
+        dateEl.innerHTML = dateSelector === '#date-tommorow'
+          ? 'Tommorow ' + date
+          : date;
+      }
 
-      document.querySelector('#date-d5').innerHTML = new Date(week[5].dt * 1000).toDateString();
-      let forecastIconD5 = document.querySelector('.forecast-icon-d5');
-      var icon = week[5].weather[0].icon;
-      forecastIconD5.innerHTML = `<img src="style/icons/${icon}.png">`;
-      document.querySelector('#forecast-d5-temp').innerHTML = Math.trunc(week[5].temp.day) + '°';
+      const iconEl = document.querySelector(iconSelector);
+      if (iconEl && icon) {
+        iconEl.innerHTML = `<img src="style/icons/${icon}.png">`;
+      }
 
-      document.querySelector('#date-d6').innerHTML = new Date(week[6].dt * 1000).toDateString();
-      let forecastIconD6 = document.querySelector('.forecast-icon-d6');
-      var icon = week[6].weather[0].icon;
-      forecastIconD6.innerHTML = `<img src="style/icons/${icon}.png">`;
-      document.querySelector('#forecast-d6-temp').innerHTML = Math.trunc(week[6].temp.day) + '°';
-    }
+      const tempEl = document.querySelector(tempSelector);
+      if (tempEl && typeof temp === 'number') {
+        tempEl.innerHTML = Math.trunc(temp) + '°';
+      }
+    };
+
+    // Use approx daily steps (8 * 3h = 24h) starting from the next day.
+    updateDay(8,  '#date-tommorow',  '.forecast-icon',      '#forecast-tommorow-temp');
+    updateDay(16, '#date-d2',        '.forecast-icon-d2',   '#forecast-d2-temp');
+    updateDay(24, '#date-d3',        '.forecast-icon-d3',   '#forecast-d3-temp');
+    updateDay(32, '#date-d4',        '.forecast-icon-d4',   '#forecast-d4-temp');
+    updateDay(40, '#date-d5',        '.forecast-icon-d5',   '#forecast-d5-temp');
+
   })
   .catch(error => console.log("Error, something went wrong with forecast", error))
 }
