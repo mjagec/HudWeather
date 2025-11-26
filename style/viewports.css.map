@@ -1,9 +1,1 @@
-{
-    "version": 3,
-    "mappings": "AA0UA;;;;GAIG",
-    "sources": [
-        "viewports.scss"
-    ],
-    "names": [],
-    "file": "viewports.css"
-}
+{"version":3,"sources":["viewports.scss"],"names":[],"mappings":"AA0UA;;;;EAAA","file":"viewports.css"}

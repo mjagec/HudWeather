@@ -1,5 +1,5 @@
 function currentWeather(){
-fetch("https://api.openweathermap.org/data/2.5/weather?lat=57.44&lon=-2.78&appid=a5f760dacb2564a55f8c91770b75eebe&units=metric")
+fetch("/api/weather?lat=57.44&lon=-2.78")
   .then(res => res.json())
   .then(data => {
     console.log(data)
@@ -44,7 +44,7 @@ fetch("https://api.openweathermap.org/data/2.5/weather?lat=57.44&lon=-2.78&appid
 }
 
 function forecastWeather(){
-  fetch("https://api.openweathermap.org/data/2.5/onecall?lat=53.649&lon=-1.7842&exclude=current,minutely,hourly&appid=a5f760dacb2564a55f8c91770b75eebe&units=metric")
+  fetch("/api/forecast?lat=53.649&lon=-1.7842")
   .then(res => res.json())
   .then(data => {
     console.log(data.daily)
