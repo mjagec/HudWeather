@@ -1364,3 +1364,79 @@ body .title-container .title {
   }
 }
 /*# sourceMappingURL=style.css.map */
+
+/* Layout for header & location controls */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Make the title behave like a normal heading inside the flow
+   instead of absolutely positioned, so elements can sit beneath it. */
+body .title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+body .title-container .title {
+  position: static;
+  left: auto;
+  -webkit-transform: none;
+          transform: none;
+}
+
+.location-controls {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  font-size: 14px;
+  color: #1D1D1D;
+}
+
+.location-controls button,
+.location-controls select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+}
+
+.location-controls button {
+  cursor: pointer;
+}
+
+/* Small screens: stack controls vertically and let them stretch */
+@media (max-width: 760px) {
+  .location-controls {
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 12px;
+  }
+
+  .location-controls label {
+    text-align: center;
+    font-size: 12px;
+  }
+
+  .location-controls button,
+  .location-controls select {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+/* Tablets: keep in a row but tighten spacing */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .location-controls {
+    gap: 8px;
+  }
+}
