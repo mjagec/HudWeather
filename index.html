@@ -11,6 +11,22 @@
            <h1 class="title">HudWeather</h1>
         </div>
      </div>
+
+     <div id="status" class="status-message"></div>
+
+     <div class="location-controls">
+        <button id="use-location-btn">Use my current location</button>
+        <label for="city-select">or choose a UK city:</label>
+        <select id="city-select">
+           <option value="">Select a city</option>
+           <option value="london">London</option>
+           <option value="manchester">Manchester</option>
+           <option value="birmingham">Birmingham</option>
+           <option value="leeds">Leeds</option>
+           <option value="glasgow">Glasgow</option>
+        </select>
+     </div>
+
      <div class="current-weather">
         <p id="type-p">Current Weather</p>
         <div class="current-weather-main">
@@ -62,6 +78,7 @@
      <div class="daily-forecast">
       
          <p id="type-p">Forecasted Weather</p>
+         <p id="forecast-status" class="status-message"></p>
 
         <div id="forecast-tommorow" class="forecast-block-prop">
           <p id="date-tommorow" class="date-prop"></p>
