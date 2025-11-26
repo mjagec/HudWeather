@@ -47,7 +47,22 @@ function forecastWeather(){
   fetch("/api/forecast?lat=53.649&lon=-1.7842")
   .then(res => res.json())
   .then(data => {
+    // If the API returned an error (e.g. 400/500), data.daily may be undefined.
+    if (!data || !Array.isArray(data.daily)) {
+      console.error('Unexpected forecast response', data);
+      const statusEl = document.querySelector('#forecast-status');
+      if (statusEl) {
+        statusEl.textContent = 'Forecast unavailable at the moment.';
+      }
+      return;
+    }
+
     console.log(data.daily)
+
+    const statusEl = document.querySelector('#forecast-status');
+    if (statusEl) {
+      statusEl.textContent = '';
+    }
 
     let week = data.daily;
     for(let i = 1, len = week.length; i < len; i++){
@@ -89,6 +104,7 @@ function forecastWeather(){
       document.querySelector('#forecast-d6-temp').innerHTML = Math.trunc(week[6].temp.day) + '°';
     }
   })
+  .catch(error => console.log("Error, something went wrong with forecast", error))
 }
 
 currentWeather();
