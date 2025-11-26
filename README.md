@@ -1,4 +1,8 @@
 # 🌤️ HudWeather – A Clean & Snappy Weather Dashboard
+<img width="737" height="443" alt="image" src="https://github.com/user-attachments/assets/8d2c2b24-2340-432c-9c20-0e6f2f527f98" />
+
+
+
 
 **Live Demo** → [Vercel Deployment](https://hud-weather.vercel.app/)
 
