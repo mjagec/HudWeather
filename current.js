@@ -1,5 +1,5 @@
 function currentWeather(){
-fetch("/api/weather?lat=57.44&lon=-2.78")
+fetch("/api/weather?lat=55.95&lon=-3.19")
   .then(res => res.json())
   .then(data => {
     console.log(data)
